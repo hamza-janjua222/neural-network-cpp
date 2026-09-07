@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(neural_cpp)
+project(neural_network_cpp)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
