@@ -26,7 +26,11 @@ file(GLOB_RECURSE SOURCES "src/**/*.cpp")
 list(FILTER SOURCES EXCLUDE REGEX ".*main\\.cpp$")
 
 # Create a library with core functionality
-add_library(neural_core ${SOURCES})
+if(SOURCES)
+    add_library(neural_core ${SOURCES})
+else()
+    add_library(neural_core INTERFACE)
+endif()
 
 # Main executable
 add_executable(cpp_neural src/main.cpp)
@@ -34,9 +38,9 @@ target_link_libraries(cpp_neural PRIVATE neural_core)
 
 # Tests
 file(GLOB TEST_SOURCES "tests/*.cpp")
-add_executable(run_tests ${TEST_SOURCES})
-target_link_libraries(run_tests PRIVATE neural_core gtest gtest_main)
+add_executable(neural_tests ${TEST_SOURCES})
+target_link_libraries(neural_tests PRIVATE neural_core gtest gtest_main)
 
 # Register tests
 include(GoogleTest)
-gtest_discover_tests(run_tests)
+gtest_discover_tests(neural_tests)
